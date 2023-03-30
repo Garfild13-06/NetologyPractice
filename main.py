@@ -37,6 +37,7 @@ class SpiderMan(Character, Spider):
 
 
 peter_parker = SpiderMan('Peter Parker', 80)
+# print(SpiderMan.mro())
 print(peter_parker.backback)
 print(peter_parker.power)
 print(peter_parker.energy)
