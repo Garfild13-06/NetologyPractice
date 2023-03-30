@@ -8,6 +8,9 @@ class Character:
     def move(self):
         print('Moving on 2 square')
 
+    def atack(self, foe):
+        foe.health -= 10
+
 
 class Spider:
     def __init__(self, power, energy=50, hands=8):
@@ -21,6 +24,9 @@ class Spider:
     def move(self):
         print("Moving on 1 square")
 
+    def atack(self, foe):
+        foe.status = 'stunned'
+
 
 class SpiderMan(Character, Spider):
     def __init__(self, name, power):
@@ -31,14 +37,25 @@ class SpiderMan(Character, Spider):
         self.energy -= 10
         self.power += 20
 
+    def webshoot(self):
+        if 'web' in self.backback:
+            super().webshoot()
+        else:
+            print('No web!')
+
     def move(self):
         self.webshoot()
         print("Move on 3 square")
 
+    def atack(self, foe):
+        super().atack(foe)
+        Spider.atack(self, foe)
+
 
 peter_parker = SpiderMan('Peter Parker', 80)
-# print(SpiderMan.mro())
-print(peter_parker.backback)
-print(peter_parker.power)
-print(peter_parker.energy)
-print(peter_parker.hands)
+enemy = Character('Some Enemy', 10)
+enemy.health = 100
+
+peter_parker.atack(enemy)
+print(enemy.health)
+print(enemy.status)
