@@ -51,11 +51,28 @@ class SpiderMan(Character, Spider):
         super().atack(foe)
         Spider.atack(self, foe)
 
+    def __lt__(self, other):
+        if not isinstance(other, Character):
+            print("Not a Character!")
+            return
+        return self.power < other.power
+
+    def __str__(self):
+        res = f"Имя: {self.name}\nСила персонажа: {self.power}"
+        return res
+
 
 peter_parker = SpiderMan('Peter Parker', 80)
-enemy = Character('Some Enemy', 10)
-enemy.health = 100
+miles_morales = SpiderMan('Miles Morales', 85)
+print(peter_parker < miles_morales)
+print(peter_parker > miles_morales)
+print(peter_parker.__lt__(miles_morales))
 
-peter_parker.atack(enemy)
-print(enemy.health)
-print(enemy.status)
+print(peter_parker)
+print(miles_morales)
+# enemy = Character('Some Enemy', 10)
+# enemy.health = 100
+
+# peter_parker.atack(enemy)
+# print(enemy.health)
+# print(enemy.status)
